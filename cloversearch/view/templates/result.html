@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Result</title>
+    <link rel="stylesheet" href="/static/search/css/bootstrap.css">
+</head>
+<body>
+<nav class="navbar navbar-expand navbar-light bg-light" style="padding: 30px;">
+    <a href="/search/page"><img class="navbar-brand" src="/static/search/images/CloverSearchLogo.png" width="200"></a>
+    <form action="/search/page/search">
+        <div class="input-group" style="width: 560px;">
+            <input type="text" class="form-control" name="w" placeholder="Input for search..." aria-label="Input for search..."
+                   aria-describedby="basic-addon2" value="{{ keyword }}">
+            <div class="input-group-append">
+                <button class="input-group-text btn btn-outline-info" type="submit" id="basic-addon2">Search</button>
+            </div>
+        </div>
+    </form>
+</nav>
+
+<div class="navbar navbar-expand navbar-light">
+    <div class="collapse navbar-collapse border-bottom" id="navbarNavDropdown" style="padding-left: 225px;">
+        <ul class="navbar-nav">
+            <li class="nav-item active" style="border-bottom: 4px; border-bottom-color: #1A73E8;border-bottom-style: solid;">
+                <a class="nav-link" href="#">全部 <span class="sr-only">(currently)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">图片</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">视频</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">地图</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">新闻</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">更多</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="text-muted" style="margin-left: 250px;margin-top: 5px;">
+    找到约 {{ result_count }} 条结果 （用时 {{ took_time }} 秒）
+</div>
+
+<div style="margin-left: 250px;margin-top: 10px;width: 40%">
+    {% for item in result %}
+        {% if 'title' in item.__dict__['model_data'] %}
+            <div style="margin-top: 10px;margin-bottom: 20px;">
+                <div style="font-size: 20px;">
+                    <a href="#" class="text-primary">
+                        {{ item.__dict__['model_data']['title'] }}
+                    </a>
+                </div>
+                <a href="{{ item.__dict__['model_data']['image_url'] }}" style="color: #006621">{{ item.__dict__['model_data']['image_url'] }}</a>
+                <div style="font-size: 14px;">
+                    {% if 'content' in item.__dict__['model_data'] %}
+                        {{ item.__dict__['model_data']['content'][0:150] }}
+                    {% elif 'guide' in item.__dict__['model_data'] %}
+                        {{ item.__dict__['model_data']['guide'][0:150] }}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
