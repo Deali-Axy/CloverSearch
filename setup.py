@@ -4,9 +4,9 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-version = '0.1.15'
+version = '0.1.18'
 description = 'CloverSearch搜索引擎的Django模块，使用起来超级方便！'
-update = '总算把CloverSearch的核心功能提取成Django模块，终于可以用了！'
+update = '优化建立索引、搜索性能，测试性能提高10倍以上，但是受限于Python语言的性能，数据量大的时候性能还是不够理想，有待进一步优化。'
 description = '{}。版本[{}]更新内容：{}'.format(description, version, update)
 
 setup(
@@ -16,6 +16,7 @@ setup(
     install_requires=[
         'jieba>=0.39',
         'django',
+        'ujson'
     ],
     url='https://github.com/Deali-Axy',
     # license='GPLv3',

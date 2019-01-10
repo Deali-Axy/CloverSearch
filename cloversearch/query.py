@@ -79,7 +79,7 @@ class SearchResultSet:
     搜索结果集，用于传递、管理搜索结果对象，API方面部分参考了Django ORM的设计
     """
 
-    objects = []  # SearchQueryObject 对象列表
+    objects = []  # SearchResultObject 对象列表
 
     def __init__(self):
         self.objects = list()

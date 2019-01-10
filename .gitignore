@@ -1,6 +1,9 @@
 .idea/
 build/
 dist/
+source/
 *.egg-info/
 *.sh
+Makefile
+*.bat
 *.pyc

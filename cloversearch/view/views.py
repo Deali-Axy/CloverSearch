@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from Search.encoder import SearchQueryObjectEncoder
-from Search.query import SearchQuery
+from cloversearch.encoder import SearchQueryObjectEncoder
+from cloversearch.query import SearchQuery
 from .response import Response
 import time
 
