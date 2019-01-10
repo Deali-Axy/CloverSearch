@@ -1,5 +1,5 @@
 from django.urls import path
-from .view import views
+from Search.view import views
 
 urlpatterns = [
     path('', views.search),

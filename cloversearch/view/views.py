@@ -22,7 +22,7 @@ def page_search(request):
     took_time = end_time - start_time
     r['took_time'] = took_time
     r['result_count'] = len(result.all)
-    r['result'] = result.all
+    r['result'] = result.all[0:10]
 
     return render(request, 'search/result.html', context=r)
 

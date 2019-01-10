@@ -1,7 +1,9 @@
+import time
+
 from django.apps import apps
 from .config import ConfigManager
 import logging
-import json
+import ujson as json
 import copy
 import os
 
@@ -95,6 +97,7 @@ class IndexManager:
             logger.error('未找到索引文件夹')
             return
 
+        start_time = time.time()
         for app_dir in os.listdir(ConfigManager.index_dir):
             for model_dir in os.listdir(os.path.join(ConfigManager.index_dir, app_dir)):
                 for index_dir in os.listdir(os.path.join(ConfigManager.index_dir, app_dir, model_dir)):
@@ -107,6 +110,9 @@ class IndexManager:
                         index.deserialize_keywords(f.read())
                     # 添加到index列表
                     self.indexes.append(index)
+        end_time = time.time()
+        used_time = end_time - start_time
+        logger.info("Loaded indexes data finished. took={}s".format(used_time))
 
     def save(self):
         # 建立各个app的文件夹
@@ -114,6 +120,7 @@ class IndexManager:
             app_dir = os.path.join(ConfigManager.index_dir, app_name)
             self.create_dir(app_dir)
 
+        start_time = time.time()
         for item in self.indexes:
             # 检查相关文件夹是否建立
             model_dir = os.path.join(ConfigManager.index_dir, item.app_name, item.model_name)
@@ -129,6 +136,9 @@ class IndexManager:
             with open(keywords_file, 'w', encoding='utf-8') as f:
                 f.write(item.serialize_keywords())
                 logger.debug('写入索引数据文件:{}'.format(keywords_file))
+        end_time = time.time()
+        used_time = end_time - start_time
+        logger.info("Loaded indexes data finished. took={}s".format(used_time))
 
     @classmethod
     def create_dir(cls, path):

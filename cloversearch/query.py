@@ -187,7 +187,8 @@ class SearchQuery:
             for field_name, clean_data in index.clean_data.items():
                 if data in clean_data:
                     search_set.add(search_obj)
-                    logger.debug('full_match: {}'.format(search_obj.__dict__))
+                    # 我发现匹配的时候输出这个调试信息很浪费性能！
+                    # logger.debug('full_match: {}'.format(search_obj.__repr__()))
                     break
         return search_set
 

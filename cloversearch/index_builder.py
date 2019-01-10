@@ -98,12 +98,12 @@ def build():
                     # 处理关键词，分词处理
                     words_list = word_segment(content)
                     index_obj.keywords[field_name] = words_list
-                    logger.debug('{}:{} 分词处理，共{}词'.format(section, field_name, len(words_list)))
+                    # logger.debug('{}:{} 分词处理，共{}词'.format(section, field_name, len(words_list)))
                     # 过滤符号
                     clean_data = character_filter(content)
                     clean_data = character_cn_filter(clean_data)
                     index_obj.clean_data[field_name] = clean_data
-                    logger.debug('{}:{} 数据字符过滤，处理后长度: {}'.format(section, field_name, len(clean_data)))
+                    # logger.debug('{}:{} 数据字符过滤，处理后长度: {}'.format(section, field_name, len(clean_data)))
                 # 添加到索引管理器的列表中
                 IndexManager.get_instance().add(index_obj)
 
