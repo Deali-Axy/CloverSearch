@@ -15,12 +15,12 @@
 4. 获取搜索结果
 
 ## Quick Start
-1. 首先在**Django**项目的环境中安装`cloversearch`
+### 1. 首先在**Django**项目的环境中安装`cloversearch`
 ```bash
 pip install cloversearch
 ```
 
-2. 编辑**Django**的`setings.py`文件：
+### 2. 编辑**Django**的`setings.py`文件：
 将`cloversearch`加入`INSTALLED_APPS`
 ```python
 # 加入INSTALLED_APPS
@@ -41,7 +41,7 @@ CLOVER_SEARCH = {
 }
 ```
 
-3. 扫描`model`与建立索引
+### 3. 扫描`model`与建立索引
 > 注意！首次使用搜索引擎时以下命令的执行顺序不可以颠倒，一定要创建配置，并且配置了需要加入检索的字段后才可以建立索引。
 ```bash
 # 扫描所有model，并且创建model配置
@@ -76,7 +76,7 @@ field4 = false
 python manage.py build_index
 ```
 
-4. 搜索接口调用
+### 4. 搜索接口调用
 ```python
 from cloversearch.query import SearchQuery
 result = SearchQuery.query('搜索关键词')
